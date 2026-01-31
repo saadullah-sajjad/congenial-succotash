@@ -163,6 +163,38 @@ export default function HomePage() {
             </p>
           </CardContent>
         </Card>
+
+        <Card className="border-dashed">
+          <CardHeader>
+            <CardTitle className="text-base">In your code</CardTitle>
+            <CardDescription>
+              Use VERCEL_ENV, not NODE_ENV, when you need prod vs preview.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm">
+            <div>
+              <p className="text-muted-foreground mb-1.5 text-xs font-medium">
+                ✅ Use this
+              </p>
+              <pre className="bg-muted rounded-lg p-3 font-mono text-xs overflow-x-auto">
+{`const isProd = process.env.VERCEL_ENV === "production"
+const isPreview = process.env.VERCEL_ENV === "preview"`}
+              </pre>
+            </div>
+            <div>
+              <p className="text-muted-foreground mb-1.5 text-xs font-medium">
+                ❌ Don&apos;t rely on this on Vercel for prod vs preview
+              </p>
+              <pre className="bg-muted rounded-lg p-3 font-mono text-xs overflow-x-auto">
+{`const isProd = process.env.NODE_ENV === "production"`}
+              </pre>
+            </div>
+            <p className="text-muted-foreground text-xs pt-1">
+              Prod vs Preview → use <code className="bg-muted px-1 rounded">VERCEL_ENV</code>.
+              Supabase URL/keys are already correct per environment.
+            </p>
+          </CardContent>
+        </Card>
       </div>
     </main>
   )
