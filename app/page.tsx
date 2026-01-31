@@ -107,6 +107,14 @@ export default function HomePage() {
                     : undefined
               }
             />
+            {vercelEnv !== "development" && nodeEnv === "production" && (
+              <p className="text-xs text-muted-foreground py-2 border-b border-border">
+                On Vercel, NODE_ENV is always &quot;production&quot; (Next.js
+                sets it at build time). Use{" "}
+                <code className="bg-muted px-1 rounded">VERCEL_ENV</code> to
+                tell Production vs Preview.
+              </p>
+            )}
             <div className="pt-3 mt-3 border-t border-border">
               <p className="text-xs text-muted-foreground mb-2">
                 Supabase (set in Vercel: Production = prod DB, Preview = dev DB)
@@ -134,18 +142,20 @@ export default function HomePage() {
           <CardContent className="text-sm text-muted-foreground space-y-2">
             <p>
               <strong>Production</strong> (main branch):{" "}
-              <code className="bg-muted px-1 rounded">NODE_ENV</code> (e.g.{" "}
-              <code className="bg-muted px-1 rounded">production</code>),{" "}
               <code className="bg-muted px-1 rounded">SUPABASE_URL</code>,{" "}
               <code className="bg-muted px-1 rounded">SUPABASE_ANON_KEY</code>{" "}
               (or <code className="bg-muted px-1 rounded">NEXT_PUBLIC_*</code>{" "}
               if used in browser) → Production Supabase.
             </p>
             <p>
-              <strong>Preview</strong> (development + feature branches):{" "}
-              <code className="bg-muted px-1 rounded">NODE_ENV</code> (e.g.{" "}
-              <code className="bg-muted px-1 rounded">development</code>), same
-              Supabase names with dev values → Preview env only.
+              <strong>Preview</strong> (development + feature branches): same
+              names with dev values → Preview env only.
+            </p>
+            <p className="pt-2 mt-2 text-xs border-t border-border">
+              <strong>NODE_ENV on Vercel:</strong> Next.js sets it to
+              &quot;production&quot; for both Production and Preview builds. Use{" "}
+              <code className="bg-muted px-1 rounded">VERCEL_ENV</code> in your
+              app to distinguish prod vs preview (e.g. which API or feature flags).
             </p>
             <p className="pt-2 text-xs">
               Do not use &quot;All Environments&quot; for DB keys. Redeploy after
